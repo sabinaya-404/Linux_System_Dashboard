@@ -1,0 +1,16 @@
+# Binaries
+sysmon
+*.out
+*.exe
+
+# Object & build artifacts
+*.o
+*.a
+*.so
+build/
+
+# Editor/OS artifacts
+.vscode/
+.idea/
+*.swp
+.DS_Store
