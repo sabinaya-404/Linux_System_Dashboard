@@ -47,3 +47,6 @@ a graveyard of my silly syntax blunders, compiler rage moments, and what i learn
 - **the mistake:** linux doesn't look in the current folder for executables unless you tell it to.
 - **the fix:** ran `./sysmon` with the dot-slash prefix.
 - **lesson learned:** always use `./` when running binaries in the local directory on unix systems
+
+## Blunder mistake, A typo in CpuRawSnapShot
+I wrote CpuRawSnapshot, instead of CpuRawSnapShot, damn, took me 10 min to notice. no cap.....
