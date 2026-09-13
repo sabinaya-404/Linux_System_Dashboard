@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <stdio.h>
 
- int main(void) {
+int main (void) {
     MemoryStats mem;
 
     if (memory_get_stats(&mem) != 0) {
@@ -11,7 +11,7 @@
         return 1;
     }
 
-    printf("Linux System Telementary\n");
+    printf("Linux System Telemetry\n");
 // RAM usage section.
     uint64_t days = mem.uptime_seconds / 86400;
     uint64_t hours = (mem.uptime_seconds % 86400) / 3600;
@@ -39,7 +39,7 @@
 sleep(1);
     CpuStats cpu;
      if (cpu_get_stats(&cpu) != 0) {
-        fprintf(stderr, "Error: Failed to read CPU stats./n");
+        fprintf(stderr, "Error: Failed to read CPU stats.\n");
      } else {
 // running it first time will be at 0% becuz we need previous sample to compute delta.
         printf("CPU Usage: %.1f%%\n", cpu.usage_percent);

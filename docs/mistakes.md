@@ -5,10 +5,10 @@ a graveyard of my silly syntax blunders, compiler rage moments, and what i learn
 ---
 
 ## bug 01: the rogue curly brace that nuked the whole file (╯°□°)╯︵ ┻━┻
-- **the symptom:** gcc threw a 50-line wall of error screaming `expected identifier or '(' before 'while'` and claiming `stats` wasn't declared.
+- **the symptom:** gcc threw a 50-line wall of terror shouting `expected identifier or '(' before 'while'` and claiming `stats` wasn't declared.
 - **the mistake:** right after checking `if (!stats) { return -1; }`, i accidentally added an extra `}` right below it on line 12. this closed the entire `memory_get_stats` function immediately, leaving `memset`, `fopen`, and the `while` loop floating in global space outside of any function.
-- **the fix:** deleted that bastard `}` on line 12 so the function body actually stays open.
-- **lesson learned:** in C, always double-check your brace pairs when gcc starts crying that variables don't exist inside what you thought was a function. This gave me a heache. lemme grab my ibuprofen.
+- **the fix:** deleted that sneaky `}` on line 12 so the function body actually stays open.
+- **lesson learned:** in C, always double-check your brace pairs when gcc starts crying that variables don't exist inside what you thought was a function (・_・;)
 
 ---
 
@@ -16,7 +16,7 @@ a graveyard of my silly syntax blunders, compiler rage moments, and what i learn
 - **the symptom:** compiler threw a syntax error inside the `while` loop parsing `/proc/meminfo`.
 - **the mistake:** wrote `sscanf(line, "MemTotal: %lu kB" &value)` with no comma between the format string and the variable address.
 - **the fix:** added the comma -> `sscanf(line, "MemTotal: %lu kB", &value)`.
-- **lesson learned:** C functions need commas between arguments, my brain was moving faster than my fingers
+- **lesson learned:** C functions need commas between arguments, my brain was moving faster than my fingers (¬_¬ )
 
 ---
 
@@ -46,7 +46,12 @@ a graveyard of my silly syntax blunders, compiler rage moments, and what i learn
 - **the symptom:** `make` compiled `sysmon` cleanly, but typing `sysmon` in the terminal gave "command not found".
 - **the mistake:** linux doesn't look in the current folder for executables unless you tell it to.
 - **the fix:** ran `./sysmon` with the dot-slash prefix.
-- **lesson learned:** always use `./` when running binaries in the local directory on unix systems
+- **lesson learned:** always use `./` when running binaries in the local directory on unix systems (｀・ω・´)
 
-## Blunder mistake, A typo in CpuRawSnapShot
-I wrote CpuRawSnapshot, instead of CpuRawSnapShot, damn, took me 10 min to notice. no cap.....
+---
+
+## bug 06: the perpetual 0.0% CPU ghost (゜-゜)
+- **the symptom:** CPU usage was stuck at `0.0%` on every single run of `./sysmon`.
+- **the mistake:** `cpu_get_stats` relied on an in-memory `static` snapshot to calculate deltas. But `main()` was only calling `cpu_get_stats` once and then exiting immediately. Since process memory gets wiped by Linux when an app exits, every run was a "first run" where `have_prev == 0`, returning `0.0%` forever!
+- **the fix:** turned `main.c` into a live continuous loop with `while (1)` and `sleep(1)` so the process stays alive and computes the real delta on every second tick.
+- **lesson learned:** `static` variables only live as long as the process is alive! Once the process terminates, all state vanishes (ﾟoﾟ〃)
