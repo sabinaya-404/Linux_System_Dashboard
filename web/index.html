@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linux System Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>⚡ LINUX SYSTEM DASHBOARD</h1>
+            <div id="uptime" class="badge">Uptime: --</div>
+        </header>
+
+        <div class="grid">
+            <div class="card">
+                <h2>CPU Usage</h2>
+                <div class="val" id="cpu-val">0%</div>
+                <div class="meter"><div id="cpu-bar" class="fill"></div></div>
+            </div>
+
+            <div class="card">
+                <h2>Memory (RAM)</h2>
+                <div class="val" id="ram-val">0%</div>
+                <div class="sub" id="ram-sub">0 / 0 GB</div>
+                <div class="meter"><div id="ram-bar" class="fill"></div></div>
+            </div>
+
+            <div class="card">
+                <h2>Disk Space (/)</h2>
+                <div class="val" id="disk-val">0%</div>
+                <div class="sub" id="disk-sub">0 / 0 GB</div>
+                <div class="meter"><div id="disk-bar" class="fill"></div></div>
+            </div>
+
+            <div class="card">
+                <h2>Network & Thermal</h2>
+                <div class="stat-row"><span>↓ Download:</span> <strong id="net-rx">0 kB/s</strong></div>
+                <div class="stat-row"><span>↑ Upload:</span> <strong id="net-tx">0 kB/s</strong></div>
+                <div class="stat-row"><span>🌡 Temp:</span> <strong id="temp-val">-- °C</strong></div>
+            </div>
+        </div>
+
+        <div class="card full">
+            <h2>Top Memory Consuming Processes</h2>
+            <table>
+                <thead>
+                    <tr><th>PID</th><th>Process Name</th><th>Memory (RSS)</th></tr>
+                </thead>
+                <tbody id="proc-table"></tbody>
+            </table>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
